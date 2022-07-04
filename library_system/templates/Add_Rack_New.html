@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Rack</title>
+    <style>
+        .nav_ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: rgb(8, 152, 85);display: flex;justify-content: space-between;
+            padding: 10px;
+            font-size: 1.2rem;font-family: "Times New Roman", Times, serif;
+
+
+        }
+
+        .nav_li {
+            float: left;
+        }
+
+        .nav_li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        .nav_li a:hover {
+             background-color: #4CAF50;
+
+
+        }
+
+        input[type=text], select {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        input[type=submit] {
+            width: 100%;
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        input[type=submit]:hover {
+            background-color: #45a049;
+        }
+
+        div {
+            border-radius: 5px;
+            background-color: #f2f2f2;
+            padding: 10px;
+
+        }
+
+        #customers {
+            font-family: Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 80%;
+            padding: 100px;
+            cursor: pointer;
+
+        }
+
+        #customers td, #customers th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        #customers tr:nth-child(even) {
+            {#background-color: #bee5eb;#}
+
+        }
+
+        #customers tr:hover {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        #customers th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #45A049;
+            color: white;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: flex-end;
+        }
+        .main_div{
+            display: flex;justify-content: center;
+        }
+        .table_div{
+
+            display: flex;justify-content: center;
+
+            align-items: center;
+            width: 80%;
+            margin-left: auto;
+  margin-right: auto;
+        }
+        .heading{
+            font-size:30px;
+            font-family: "Times New Roman", Times, serif;
+        }
+        .tag_css{
+        font-weight: 400;
+            text-decoration: none
+        ;color: gray;
+        }
+
+    </style>
+</head>
+<body>
+<div class="nav">
+    <div  style="width: 100%">
+        <ul class="nav_ul">
+            <li class="nav_li"><a class="active" href="/library/racks_list">Add Racks</a></li>
+
+            <li class="nav_li"><a href="/library/racks_list_count">Search Racks </a></li>
+            <li class="nav_li"> <a href="/library/show_books_details" >Search Books</a></li>
+            <li class="nav_li"><a href="/signout">Logout</a></li>
+
+        </ul>
+    </div>
+</div>
+<div class="main_div">
+    <form action="/library/racks_view" method="post">
+        <label for="rack_name"  class="heading">Rack Name</label>
+        <input type="text" id="rack_name" name="rack_name" placeholder="Rack name" required>
+
+        <input type="hidden" id="email" name="email">
+        <input type="hidden" id="token" name="token">
+
+
+        <input type="submit" value="+ Add Rack">
+    </form>
+
+</div>
+
+<div >
+<div class="table_div">
+<table id="customers" >
+    <tr>
+        <th>Rack Name</th>
+
+    </tr>
+
+    {% for item in data %}
+        <tr>
+            <td><a class="tag_css" href='/library/racks_view/{{ item.id }}'>{{ item.rack_name }}</a></td>
+        </tr>
+    {% endfor %}
+
+
+</table>
+</div>
+</div>
+<script>
+    sessionStorage.setItem('email', '{{ user_data.email }}');
+    sessionStorage.setItem('token', '{{ user_data.token }}');
+    var email = window.sessionStorage.getItem("email");
+    var token = window.sessionStorage.getItem("token");
+    document.getElementById("email").value = email;
+    document.getElementById("token").value = token;
+</script>
+</body>
+</html>

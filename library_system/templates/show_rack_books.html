@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        table, td, th {
+            border: 1px solid;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+    </style>
+</head>
+<body>
+<table>
+    <tr>
+        <th>Rack name</th>
+        <th>Book Title</th>
+        <th>Author</th>
+        <th>Published year</th>
+    </tr>
+    {% for item in data %}
+        <tr>
+            <td>{{ item.rack_name }}</td>
+            <td>{{ item.book_title }}</td>
+            <td>{{ item.author }}</td>
+            <td>{{ item.published_year }}</td>
+        </tr>
+
+    {% endfor %}
+
+    </tr>
+</table>
+
+</body>
+</html>
+
+

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        .nav_ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: rgb(8, 152, 85);display: flex;justify-content: space-between;
+            padding: 10px;
+            font-size: 1.2rem;font-family: "Times New Roman", Times, serif;
+
+
+        }
+
+        .nav_li {
+            float: left;
+        }
+
+        .nav_li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        .nav_li a:hover {
+             background-color: #4CAF50;
+
+
+        }
+
+        input[type=text], select {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        input[type=submit] {
+            width: 100%;
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        input[type=submit]:hover {
+            background-color: #45a049;
+        }
+
+        div {
+            border-radius: 5px;
+            background-color: #f2f2f2;
+            padding: 10px;
+
+        }
+
+        #customers {
+            font-family: Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 80%;
+            padding: 100px;
+            cursor: pointer;
+
+        }
+
+        #customers td, #customers th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        #customers tr:nth-child(even) {
+            {#background-color: #bee5eb;#}
+
+        }
+
+        #customers tr:hover {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        #customers th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #45A049;
+            color: white;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: flex-end;
+        }
+        .main_div{
+            display: flex;justify-content: center;
+        }
+        .table_div{
+
+            display: flex;justify-content: center;
+
+            align-items: center;
+            width: 80%;
+            margin-left: auto;
+  margin-right: auto;
+        }
+        .heading{
+            font-size:20px;
+            font-family: "Times New Roman", Times, serif;
+        }
+        .tag_css{
+        font-weight: 400;
+            text-decoration: none
+        ;color: gray;
+        }.form_div{
+            display: flex;justify-content: space-around;flex-direction: row;
+            width: 45%;
+
+
+                 }.form_main{
+            display: flex;justify-content: space-around;}
+            body{
+                background-color: #F2F2F2;
+            }
+
+    </style>
+
+</head>
+<body>
+<div class="nav">
+    <div  style="width: 100%">
+        <ul class="nav_ul">
+            <li class="nav_li"><a href="/library/racks_list_count_user">Search Racks </a></li>
+            <li class="nav_li"> <a href="/library/show_books_details_user" >Search Books</a></li>
+            <li class="nav_li"><a href="/signout">Logout</a></li>
+
+        </ul>
+    </div>
+</div>
+<div class="form_main" >
+<form action="/library/show_books_details_user" method="get" class="form_div">
+<input type="text" id="search_text" name="search_text" placeholder="Search here.." ><br><br>
+
+<select name="books_search" id="books_search" style="margin-left: 20px;margin-right: 20px">
+  <option value="author">Author</option>
+  <option value="book_title">Title</option>
+  <option value="publication_year">Year</option>
+</select>
+    <input type="submit" value="Submit">
+</form>
+</div>
+<div class="table_div">
+<table id="customers">
+    <tr>
+        <th>Racks name</th>
+        <th>Book Title</th>
+        <th>Author</th>
+        <th>Published year</th>
+    </tr>
+    {% for item in data %}
+        <tr>
+            <td>{{ item.rack_name }}</td>
+            <td>{{ item.book_title }}</td>
+            <td>{{ item.author }}</td>
+            <td>{{ item.published_year }}</td>
+        </tr>
+
+    {% endfor %}
+
+    </tr>
+</table>
+</div>
+
+</body>
+</html>
+
+

@@ -1,0 +1,152 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8"/>
+    <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <link
+            href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap"
+            rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="/static/fonts/icomoon/style.css"/>
+
+    <link rel="stylesheet" href="/static/css/owl.carousel.min.css"/>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css"/>
+
+    <!-- Style -->
+    <link rel="stylesheet" href="/static/css/style.css"/>
+
+    <title>Library System</title>
+</head>
+<body>
+<div class="content">
+    <div class="container">
+        <div id="myDIV">
+            <div class="mb-4 row justify-content-center">
+                <div class="col-md-6 contents">
+                    <div class="row justify-content-center">
+                        <div class="col-md-12">
+                            <div class="mb-4 row justify-content-center">
+                                <h2><strong>Add Book </strong></h2>
+                            </div>
+                            <form action="/library/books_view" method="post">
+
+                                <input style="margin-bottom: 20px;" type="hidden" name="racks" id="racks"
+                                       placeholder="Rack id"
+                                       value={{ data.id }}
+                                       class="form-control"/>
+                                <input style="margin-bottom: 20px;" type="text" name="book_title" id="book_title"
+                                       placeholder="Book title"
+                                       class="form-control"/>
+                                <input style="margin-bottom: 20px;" type="text" name="author" id="author"
+                                       placeholder="author"
+                                       class="form-control"/>
+                                <input style="margin-bottom: 20px;" type="text" name="published_year" id="published_year"
+                                       placeholder="Published year"
+                                       class="form-control"/>
+
+
+                                <input
+                                        type="submit"
+                                        value="+ Add Book"
+                                        class="btn btn-pill text-white btn-block btn-primary"
+                                />
+
+                            </form>
+                            <ul id="myUL">
+                                {% for item in data.books %}
+                                    <a href='/library/books_view/{{ item.id }}'><li>{{ item.book_title}}</li></a>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    // Create a "close" button and append it to each list item
+    var myNodelist = document.getElementsByTagName("LI");
+    var i;
+    for (i = 0; i < myNodelist.length; i++) {
+        var span = document.createElement("SPAN");
+        var txt = document.createTextNode("\u00D7");
+        span.className = "close";
+        span.appendChild(txt);
+        myNodelist[i].appendChild(span);
+    }
+
+    // Click on a close button to hide the current list item
+    var close = document.getElementsByClassName("close");
+    var i;
+    for (i = 0; i < close.length; i++) {
+        close[i].onclick = function () {
+            var div = this.parentElement;
+            div.style.display = "none";
+        };
+    }
+
+    // Add a "checked" symbol when clicking on a list item
+    var list = document.querySelector("ul");
+    list.addEventListener(
+        "click",
+        function (ev) {
+            if (ev.target.tagName === "LI") {
+                ev.target.classList.toggle("checked");
+            }
+        },
+        false
+    );
+
+    // Create a new list item when clicking on the "Add" button
+    function newElement() {
+        var li = document.createElement("li");
+        var inputValue = document.getElementById("rack_name").value;
+        var t = document.createTextNode(inputValue);
+        li.appendChild(t);
+        if (inputValue === "") {
+            alert("You must write something!");
+        } else {
+            document.getElementById("myUL").appendChild(li);
+        }
+        document.getElementById("myInput").value = "";
+
+        var span = document.createElement("SPAN");
+        var txt = document.createTextNode("\u00D7");
+        span.className = "close";
+        span.appendChild(txt);
+        li.appendChild(span);
+
+        for (i = 0; i < close.length; i++) {
+            close[i].onclick = function () {
+                var div = this.parentElement;
+                div.style.display = "none";
+            };
+        }
+    }
+</script>
+
+{% load static %}
+<script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+<script src="{% static 'js/popper.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/main.js' %}"></script>
+
+
+{#<script src="/static/js/jquery-3.3.1.min.js"></script>#}
+{#<script src="/static/js/popper.min.js"></script>#}
+{#<script src="/static/js/bootstrap.min.js"></script>#}
+{#<script src="/static/js/main.js"></script>#}
+</body>
+</html>
